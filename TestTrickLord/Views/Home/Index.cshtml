@@ -1,0 +1,153 @@
+﻿@model List<TestTrickLord.Models.ImageModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #ffe6e6; /* Màu nền nhẹ nhàng */
+        text-align: center;
+    }
+
+    h2 {
+        color: #d63384; /* Màu hồng ngọt ngào */
+        font-size: 28px;
+    }
+
+    #showImageBtn {
+        background-color: #ff4d79;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    #showImageBtn:hover {
+        background-color: #e6005c;
+        transform: scale(1.05);
+    }
+
+    #imageContainer {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    #displayImage {
+        width: 480px;
+        height: 480px;
+        object-fit: cover; /* Cắt ảnh vừa khung mà không méo */
+        border-radius: 15px;
+        border: 4px solid #ff4d79;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+
+    .controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .controls button {
+        background-color: #ff4d79;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .controls button:hover {
+        background-color: #e6005c;
+        transform: scale(1.1);
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+<button id="showImageBtn">Bấm Vào Đây Trước Nèeee</button>
+
+<div id="imageContainer" class="hidden">
+    <img id="displayImage" src="" alt="Image Viewer" class="hidden">
+
+    <div class="controls">
+        <button id="prevBtn" class="hidden">⬅️ Quay lại nè 🐾</button>
+        <button id="nextBtn" class="hidden">🎁 Thưởng nè ➡️</button>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        let images = @Html.Raw(Json.Serialize(Model));
+        let imageIndex = 0;
+
+                document.getElementById("showImageBtn").addEventListener("click", function() {
+            if (images.length > 0) {
+                imageIndex = images.findIndex(img => img.imageUrl.includes("image3.png"));
+                if (imageIndex === -1) imageIndex = 0;
+                showImage(imageIndex);
+
+                document.getElementById("imageContainer").classList.remove("hidden");
+                document.getElementById("displayImage").classList.remove("hidden"); // Hiện ảnh lên
+                document.getElementById("prevBtn").classList.remove("hidden");
+                document.getElementById("nextBtn").classList.remove("hidden");
+
+                this.style.display = "none";
+            } else {
+                alert("No images found.");
+            }
+        });
+
+
+
+               document.getElementById("nextBtn").addEventListener("click", function() {
+            if (imageIndex < images.length - 1) {
+                imageIndex++;
+                showImage(imageIndex);
+            }
+            if (imageIndex === images.length - 1) {
+                document.getElementById("nextBtn").classList.add("hidden");
+            }
+            document.getElementById("prevBtn").classList.remove("hidden");
+        });
+
+        document.getElementById("prevBtn").addEventListener("click", function() {
+            if (imageIndex > 0) {
+                imageIndex--;
+                showImage(imageIndex);
+            }
+            document.getElementById("nextBtn").classList.remove("hidden");
+            if (imageIndex === 0) {
+                document.getElementById("prevBtn").classList.add("hidden");
+            }
+        });
+
+        document.getElementById("showImageBtn").addEventListener("click", function() {
+            if (imageIndex === 0) {
+                document.getElementById("prevBtn").classList.add("hidden");
+            }
+        });
+
+
+        function showImage(index) {
+            document.getElementById("displayImage").src = images[index].imageUrl;
+        }
+    </script>
+}
+

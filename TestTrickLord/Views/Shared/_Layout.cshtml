@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TestTrickLord</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TestTrickLord.styles.css" asp-append-version="true" />
+</head>
+<style>
+    /* 🌸 Tổng thể */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right, #ffdde1, #ee9ca7); /* Hồng gradient siêu xinh */
+        color: #5a3f37; /* Màu chữ dịu dàng */
+        text-align: center;
+    }
+
+    /* 🌸 Thanh điều hướng */
+    .navbar {
+        background: #ff6f91 !important; /* Màu hồng rực rỡ */
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-brand {
+        font-size: 28px;
+        font-weight: bold;
+        font-family: 'Dancing Script', cursive; /* Chữ viết tay lãng mạn */
+        color: #fff !important;
+        text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7);
+        animation: glow 2s infinite alternate;
+    }
+
+    /* 🌸 Menu */
+    .nav-link {
+        color: #fff !important;
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+        .nav-link:hover {
+            color: #ffdde1 !important;
+            transform: scale(1.1);
+        }
+
+    /* 🌸 Nội dung chính */
+    .container {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+</style>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">🎨 Canvas of Love</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
